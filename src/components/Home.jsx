@@ -117,22 +117,22 @@ function Home() {
           </p>
           <div style={{ display: "flex", justifyContent: "center", gap:"30px" }} id="iconDiv">
             <div  style={{ display: "flex", gap:"20px" }}>
-            <i class="fa-solid fa-volume-high" style={{color:"blue", fontSize:"30px"}}></i>
+            <i className="fa-solid fa-volume-high" style={{color:"blue", fontSize:"30px"}}></i>
               <p style={{fontSize:"30px"}}>Audio Classes</p>
             </div>
             
             <div style={{ display: "flex", gap:"20px" }}>
-            <i class="fa-solid fa-users-viewfinder" style={{color:"blue", fontSize:"30px"}}></i>
+            <i className="fa-solid fa-users-viewfinder" style={{color:"blue", fontSize:"30px"}}></i>
               <p style={{fontSize:"30px"}}>Live Classes</p>
             </div>
 
             <div style={{ display: "flex",  gap:"20px" }}>
-            <i class="fa-solid fa-circle-play" style={{color:"blue", fontSize:"30px"}}></i>
+            <i className="fa-solid fa-circle-play" style={{color:"blue", fontSize:"30px"}}></i>
               <p style={{fontSize:"30px"}}>Recorded Classes</p>
             </div>
             
             <div style={{ display: "flex",  gap:"20px" }}>
-            <i class="fa-solid fa-book-open" style={{color:"blue", fontSize:"30px"}}></i>
+            <i className="fa-solid fa-book-open" style={{color:"blue", fontSize:"30px"}}></i>
               <p style={{fontSize:"30px"}}>50+ Notes</p>
             </div>
           </div>
