@@ -1,6 +1,6 @@
 function Home() {
   return (
-    <div>
+    <div style={{width: '90%', margin:"0 auto"}}>
       <div id="homeMainDiv" style={{ backgroundColor: "black" }}>
         <div style={{ padding: "30px" }}>
           <h1 style={{ color: "white", fontSize: "50px" }}>
@@ -105,7 +105,7 @@ function Home() {
         </div>
       </div>
 
-      <div style={{ backgroundColor: "rgb(252,243,236)" }}>
+      <div style={{ backgroundColor: "rgb(252,243,236)", gap:"50px" }}>
         <div>
           <h1 style={{fontSize:"20px"}}>High Quality Video, Audio & Live Class.</h1>
           <p style={{fontSize:"20px"}}>

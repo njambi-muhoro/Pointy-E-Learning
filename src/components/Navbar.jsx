@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function NavBar() {
   return (
-    <div>
+    <div style={{width: '90%', margin:"0 auto"}}>
     <div
       className="container-fluid top-bar theme-bg-primary-darken justify-content-between" id="navSectionDive"
       style={{ border: "1px solid red" }}
