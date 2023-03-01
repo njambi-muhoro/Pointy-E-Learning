@@ -1,36 +1,41 @@
 import React, { useState } from "react";
 
 function Teacher() {
-  const [course, setCourse] = useState("");
+  const [selectedCourse, setSelectedCourse] = useState("");
   const [description, setDescription] = useState("");
-  const [link, setLink] = useState("");
+  const [videoLink, setVideoLink] = useState("");
   const [subtopic, setSubtopic] = useState("");
+  const [teacherName, setTeacherName] = useState("");
 
-  const handleCourseChange = (event) => {
-    setCourse(event.target.value);
+  const handleSelectedCourseChange = (e) => {
+    setSelectedCourse(e.target.value);
   };
 
-  const handleDescriptionChange = (event) => {
-    setDescription(event.target.value);
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
   };
 
-  const handleLinkChange = (event) => {
-    setLink(event.target.value);
+  const handleVideoLinkChange = (e) => {
+    setVideoLink(e.target.value);
   };
 
-  const handleSubtopicChange = (event) => {
-    setSubtopic(event.target.value);
+  const handleSubtopicChange = (e) => {
+    setSubtopic(e.target.value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleTeacherNameChange = (e) => {
+    setTeacherName(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
     const newCourse = {
-      title: course,
-      subtopic: subtopic,
-      teachersname: "Your Name",
+      course: selectedCourse,
       description: description,
-      link: link,
+      videoLink: videoLink,
+      subtopic: subtopic,
+      teachersname: teacherName,
     };
 
     fetch("http://localhost:2870/courses", {
@@ -40,80 +45,82 @@ function Teacher() {
       },
       body: JSON.stringify(newCourse),
     })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setCourse("");
-        setDescription("");
-        setLink("");
-        setSubtopic("");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
+
+    setSelectedCourse("");
+    setDescription("");
+    setVideoLink("");
+    setSubtopic("");
+    setTeacherName("");
   };
 
   return (
     <div className="container">
-      <div className="row">
-        <div className="col-md-6 offset-md-3">
-          <h2>Add New Course</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="course">Course:</label>
-              <select
-                className="form-control"
-                id="course"
-                name="course"
-                value={course}
-                onChange={handleCourseChange}
-              >
-                <option value="">Select Course</option>
-                <option value="math">Math</option>
-                <option value="chemistry">Chemistry</option>
-                <option value="physics">Physics</option>
-                <option value="biology">Biology</option>
-              </select>
-            </div>
-            <div className="form-group">
-              <label htmlFor="subtopic">Subtopic:</label>
-              <input
-                type="text"
-                className="form-control"
-                id="subtopic"
-                name="subtopic"
-                value={subtopic}
-                onChange={handleSubtopicChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="description">Description:</label>
-              <textarea
-                className="form-control"
-                id="description"
-                name="description"
-                value={description}
-                onChange={handleDescriptionChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="link">Video Link:</label>
-              <input
-                type="text"
-                className="form-control"
-                id="link"
-                name="link"
-                value={link}
-                onChange={handleLinkChange}
-              />
-            </div>
-            <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
+      <h1 className="text-center my-5">Add a New Course</h1>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="selectedCourse">Select Course:</label>
+          <select
+            className="form-control"
+            id="selectedCourse"
+            value={selectedCourse}
+            onChange={handleSelectedCourseChange}
+          >
+            <option value="">Select a course</option>
+            <option value="Math">Math</option>
+            <option value="Chemistry">Chemistry</option>
+            <option value="Physics">Physics</option>
+            <option value="Biology">Biology</option>
+          </select>
+        </div>
+        <div className="form-group">
+          <label htmlFor="description">Description:</label>
+          <input
+            type="text"
+            className="form-control"
+            id="description"
+            value={description}
+            onChange={handleDescriptionChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="videoLink">Video Link:</label>
+          <input
+            type="text"
+            className="form-control"
+            id="videoLink"
+            value={videoLink}
+            onChange={handleVideoLinkChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="subtopic">Subtopic:</label>
+          <input
+            type="text"
+            className="form-control"
+            id="subtopic"
+            value={subtopic}
+            onChange={handleSubtopicChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="teacherName">Teacher's Name:</label>
+          <input
+            type="text"
+            className="form-control"
+            id="teacherName"
+            value={teacherName}
+            onChange={handleTeacherNameChange}
+          />
+        </div>
+        <button type="submit" className="btn btn-primary">
+                    submit
+                    </button>
           </form>
         </div>
-      </div>
-    </div>
+     
   );
 }
 
