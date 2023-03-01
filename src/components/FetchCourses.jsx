@@ -2,23 +2,9 @@ import React, { useState, useEffect } from "react";
 import Student from "./Student";
 
 function FetchCourses(props) {
-  const [favoriteCourses, setFavoriteCourses] = useState([]);
-
-  const handleCourseFavorite = (course) => {
-    if (favoriteCourses.includes(course)) {
-      // Remove course from favorites
-      const updatedFavorites = favoriteCourses.filter((c) => c !== course);
-      setFavoriteCourses(updatedFavorites);
-    } else {
-      // Add course to favorites
-      const updatedFavorites = [...favoriteCourses, course];
-      setFavoriteCourses(updatedFavorites);
-    }
-  };
-
   const [onlineCourses, setCourses] = useState([]);
-
   const [showLikeButton, setShowLikeButton] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:2870/courses")
@@ -28,10 +14,39 @@ function FetchCourses(props) {
       });
   }, []);
 
+  
+  const filteredCourses = onlineCourses.filter((course) => {
+    const subtopics = course.subtopic.split(';');
+    const subtopicsJoined = subtopics.join(", ").toLowerCase();
+    return subtopicsJoined.includes(searchValue.toLowerCase());
+  });
+
+  // the split method is used to split the subtopic string into
+  //  an array using a semicolon as the delimiter. Then, the join method
+  //   is used to join the array back together with a comma and a space as 
+  //   the separator. Finally, the toLowerCase method is used to convert the
+  //    joined string and the search value to lowercase for case-insensitive
+  //     comparison
+
   return (
     <div className="container">
       <div className="row">
-        {onlineCourses.map((course) => (
+        <div className="col-lg-12 col-md-12 col-sm-12 mb-3">
+          <form className="d-flex">
+            <input
+              className="form-control mr-sm-2"
+              type="search"
+              placeholder="Search For Any Topic"
+              aria-label="Search"
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
+            />
+            <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
+              <i className="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </form>
+        </div>
+        {filteredCourses.map((course) => (
           <div
             key={course.id}
             className="col-lg-3 col-md-6 col-sm-12 mb-3"
